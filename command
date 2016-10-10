@@ -8,3 +8,7 @@ bin/rake db:create RAILS_ENV=production
 bin/rake assets:precompile RAILS_ENV=production
 
 bin/rails s -e production
+
+bin/rails
+
+bin/rails g controller errors
