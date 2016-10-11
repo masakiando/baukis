@@ -18,3 +18,10 @@ bin/rake db:migrate
 bin/rails r 'StaffMember.columns.each{ |c| p [ c.name, c.type ] }'
 
 bin/rspec spec/models/staff_member_spec.rb
+          spec/models/staff_member_spec.rb
+
+bin/rake db:seed
+
+bin/rails r 'puts StaffMember.count'
+
+bin/rails r 'puts StaffMember.first.hashed_password'
