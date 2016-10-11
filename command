@@ -25,3 +25,9 @@ bin/rake db:seed
 bin/rails r 'puts StaffMember.count'
 
 bin/rails r 'puts StaffMember.first.hashed_password'
+
+mkdir app/views/customer/shared
+
+cp app/views/shared/_header.html.erb app/views/staff/shared/
+
+
