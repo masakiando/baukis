@@ -18,17 +18,21 @@ header {
   padding: $moderate;
   background-color: $dark_cyan;
   color: $very_light_gray;
-  span.logo-mark{
+  span.logo-mark {
     font-weight: bold;
   }
+  a {
+    float: right;
+    color: $very_light_gray;
+  }
 }
-footer{
+footer {
   bottom: 0;
   position: absolute;
   width: 100%;
   background-color: $dark_gray;
   color: $very_light_gray;
-  p{
+  p {
     text-align: center;
     padding: $moderate;
     margin: 0;
