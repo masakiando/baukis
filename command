@@ -26,8 +26,15 @@ bin/rails r 'puts StaffMember.count'
 
 bin/rails r 'puts StaffMember.first.hashed_password'
 
+bin/rails r 'puts Administrator.first.hashed_password'
+
 mkdir app/views/customer/shared
 
-cp app/views/shared/_header.html.erb app/views/staff/shared/
+cp app/views/shared/_header.html.erb app/views/customer/shared/
 
+rm app/views/shared/_header.html.erb 
 
+bin/rails g model Administrator
+
+bin/rake db:reset
+bin/rspec spec/services/staff/authenticator_spec.rb

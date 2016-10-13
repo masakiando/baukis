@@ -1,22 +1,49 @@
 Rails.application.routes.draw do
-  namespace :staff do
-    root 'top#index'
-    get 'login' => 'sessions#new', as: :login
-    post 'session' => 'sessions#create', as: :session
-    delete 'session' => 'sessions#destroy'
+  config = Rails.application.config.baukis
+
+  constraints host: config[:staff][:host] do
+    namespace :staff, path: config[:staff][:path] do
+      root 'top#index'
+      get 'login' => 'sessions#new', as: :login
+      resource :session, only: [ :create, :destroy ]
+      resource :account, except: [ :new, :create, :destroy ]
+    end
   end
 
-  namespace :admin do
-    root 'top#index'
-    get 'login' => 'sessions#new', as: :login
-    post 'session' => 'sessions#create', as: :session
-    delete 'session' => 'sessions#destroy'
+  constraints host: config[:admin][:host] do
+    namespace :admin, path: config[:admin][:path] do
+      root 'top#index'
+      get 'login' => 'sessions#new', as: :login
+      resource :session, only: [ :create, :destroy ]
+      resources :staff_members
+    end
   end
 
-  namespace :customer do
-    root 'top#index'
+  constraints host: config[:customer][:host] do
+    namespace :customer, path: config[:customer][:path] do
+      root 'top#index'
+    end
   end
 
-  root 'errors#routing_error'
-  get '*anything' => 'errors#routing_error'
+  root 'errors#not_found'
+  get '*anything' => 'errors#not_found'
 end
+    #staff
+    # post 'session' => 'sessions#create', as: :session
+    # delete 'session' => 'sessions#destroy'
+    # get 'account' => 'accounts#show', as: :staff_account
+    # get 'account/new' => 'accounts#new', as: :new_staff_account
+    # get 'account/edit' => 'accounts#edit', as: :edit_staff_account
+    # post 'account' => 'accounts#create', as: :staff_account
+    # patch 'account' => 'accounts#update', as: :staff_account
+    # delete 'account' => 'accounts#destroy', as: :staff_account
+    #admin
+    # post 'session' => 'sessions#create', as: :session
+    # delete 'session' => 'sessions#destroy'
+    # get 'staff_members' => 'staff_members#index', as: :admin_staff_member
+    # get 'staff_members/:id' => 'staff_members#show', as: :admin_staff_member
+    # get 'staff_members/new' => 'staff_members#new', as: :new_admin_staff_member
+    # get 'staff_members/:id/edit' => 'staff_members#edit', as: :edit_admin_staff_member
+    # post 'staff_members' => 'staff_members#create', as: :admin_staff_members
+    # patch 'staff_members/:id' => 'staff_members#update', as: :admin_staff_member
+    # delete 'staff_members/:id' => 'staff_members#destroy', as: :admin_staff_member
