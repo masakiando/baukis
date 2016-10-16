@@ -13,6 +13,6 @@ class StaffMember < ActiveRecord::Base
 
   def active?
     !suspended? && start_date <= Date.today &&
-      (end_date.nil? || end_date > Data.today)
+      (end_date.nil? || end_date > Date.today)
   end
 end
