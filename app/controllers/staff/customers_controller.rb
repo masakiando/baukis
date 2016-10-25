@@ -9,11 +9,11 @@ class Staff::CustomersController < Staff::Base
   end
 
   def new
-    @customer_form = Staff::CustomerForm.new # 引数省略 #初期登録ぺージ
+    @customer_form = Staff::CustomerForm.new
   end
 
   def edit
-    @customer_form = Staff::CustomerForm.new(Customer.find(params[:id])) #更新時初期ぺージ
+    @customer_form = Staff::CustomerForm.new(Customer.find(params[:id]))
   end
 
   def create
@@ -22,6 +22,9 @@ class Staff::CustomersController < Staff::Base
     if @customer_form.save
       flash.notice = '顧客を追加しました。'
       redirect_to action: 'index'
+    else
+      flash.now.alert = '入力に誤りがあります。'
+      render action: 'new'
     end
   end
 
