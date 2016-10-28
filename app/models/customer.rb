@@ -15,4 +15,11 @@ class Customer < ActiveRecord::Base
     before: ->(obj) { Date.today },
     allow_blank: true
   }
+  before_save do
+    if birthday
+      self.birth_year = birth.year
+      self.birth_month = birth.month
+      self.birth_mday = birth.mday
+    end
+  end
 end
