@@ -18,9 +18,9 @@ class Customer < ActiveRecord::Base
   }
   before_save do
     if birthday
-      self.birth_year = birth.year
-      self.birth_month = birth.month
-      self.birth_mday = birth.mday
+      self.birth_year = birthday.year
+      self.birth_month = birthday.month
+      self.birth_mday = birthday.mday
     end
   end
 end
