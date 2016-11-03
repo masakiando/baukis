@@ -2,7 +2,9 @@ require 'rails_helper'
 
 feature '職員による顧客電話番号管理' do
   include FeaturesSpecHelper
+  # オフジェクトを使用できるように記憶
   let(:staff_member) { create(:staff_member) }
+  # オフジェクトを使用できるように記憶と値も確定
   let!(:customer) { create(:customer) }
 
   before do

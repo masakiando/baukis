@@ -1,0 +1,9 @@
+@import 'colors'; /**/
+@import 'dimensions'; /*寸法*/
+
+div.description {
+  margin: $wide;
+  padding: $wide;
+  font-size: $huge;
+  background-color: $very_light_gray;
+}
