@@ -4,9 +4,11 @@ class Staff::ProgramForm
   attr_accessor :program
   delegate :persisted?, :save, to: :program
 
+  # 初期化メソッド
   def initialize(program = nil)
     @program = program
     @program ||= Program.new
+    # 編集画面表示
     if @program.application_start_time
       @program.application_start_date =
         @program.application_start_time.to_date.to_s
@@ -14,10 +16,12 @@ class Staff::ProgramForm
         sprintf('%02d', @program.application_start_time.hour)
       @program.application_start_minute =
         sprintf('%02d', @program.application_start_time.min)
+    # 新規登録画面表示
     else
       @program.application_start_hour = '09'
       @program.application_start_minute = '00'
     end
+    # 編集画面表示
     if @program.application_end_time
       @program.application_end_date =
         @program.application_end_time.to_date.to_s
@@ -26,8 +30,29 @@ class Staff::ProgramForm
       @program.application_end_minute =
         sprintf('%02d', @program.application_end_time.min)
     else
+      # 新規登録画面表示
       @program.application_end_hour = '17'
       @program.application_end_minute = '00'
     end
+  end
+  # 新規登録実行 更新実行 フィルタリング  値移行 
+  def assign_attributes(params = {})
+    @params = params
+    program.assign_attributes(program_params)
+  end
+
+  private
+  def program_params
+    @params.require(:program).permit(
+    :title, :description,
+    :application_start_date,
+    :application_start_hour,
+    :application_start_minute,
+    :application_end_date,
+    :application_end_hour,
+    :application_end_minute,
+    :min_number_of_participants,
+    :max_number_of_participants
+    )
   end
 end
