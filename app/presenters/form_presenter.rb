@@ -19,7 +19,10 @@ class FormPresenter
 
   def text_field_block(name, label_text, options = {})
     markup(:div) do |m|
+# 下記decorated_labelメソッドでラベル生成。引数optionsにrequiredがある場合classを指定する。
       m << decorated_label(name, label_text, options)
+# delegateでform_builder移譲しているため下記のtext_fieldはform_builder.text_fieldと読め
+# # またorm_builder.text_fieldはf.text_fieldとなりフォールド生成される
       m << text_field(name, options)
       if options[:maxlength]
         m.span "（#{options[:maxlength]}文字以内）", class: 'instruction'

@@ -1,0 +1,15 @@
+<% @title = 'アカウントの編集' %>
+<h1><%= @title %></h1>
+
+<div id="generic-form">
+  <!-- form_forメソッド 、@customer_formはStaff::CustomersControllerでのeditアクションで作ったインスタンス変数、as: 'form'はプレフィックス名を設定、urlは送信先、登録済みはPATCT、未登録ではPOSTとなる-->
+  <%= form_for @customer_form, as: 'form',
+        url: :confirm_customer_account do |f| %>
+    <!-- f: fの左のfは右のfを参照するためのコード。右はフォームビルダーオブジェクト、このオブジェクト呼び出しf.submitで 送信ボタンなど生成できる-->
+    <%= render 'form', f: f %>
+    <div class="buttons">
+      <%= f.submit '確認画面へ進む' %>
+      <%= link_to 'キャンセル', :customer_account %>
+    </div>
+  <% end %>
+</div>
