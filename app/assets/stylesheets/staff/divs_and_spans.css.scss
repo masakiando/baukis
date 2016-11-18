@@ -1,7 +1,7 @@
 @import 'colors'; /**/
 @import 'dimensions'; /*寸法*/
 
-div.description {
+div.description, div.body {
   margin: $wide;
   padding: $wide;
   font-size: $huge;
