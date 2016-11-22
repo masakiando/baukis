@@ -1,4 +1,10 @@
 class Customer::MessagesController < Customer::Base
+
+  def index
+    @messages = current_customer.inbound_messages
+      .where(discarded: false).page(params[:page])
+  end
+
   def new
     @message = CustomerMessage.new
   end
